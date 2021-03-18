@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Collapse,
   Container,
-  DropdownItem,
   DropdownMenu,
   DropdownToggle,
   Nav,
@@ -34,6 +33,10 @@ const CustomNavLink = styled(Link).attrs(props => ({
   className: 'nav-link'
 }))``;
 
+const CustomDropDownItem = styled(Link).attrs(props => ({
+  className: "dropdown-item"
+}))``;
+
 interface CustomNavItemProps {
   to: string;
   title: string;
@@ -62,12 +65,8 @@ export const NavigationHeader = () => {
                   Login
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem>
-                    Login
-                  </DropdownItem>
-                  <DropdownItem>
-                    Register
-                  </DropdownItem>
+                  <CustomDropDownItem to="/login">Login</CustomDropDownItem>
+                  <CustomDropDownItem to="/register">Register</CustomDropDownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>
