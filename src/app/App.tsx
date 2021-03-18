@@ -1,13 +1,13 @@
 import React from 'react';
-import {Navigation} from "../common/Navigation";
+import {Navigation} from "../features/common/Navigation";
 import {Route, Switch} from 'react-router-dom';
-import {SnippetList} from "../snippets/SnippetList";
-import {TagList} from "../tags/TagList";
-import {CategoryList} from "../categories/CatetoryList";
-import {Feedback} from "../feedback/Feedback";
-import {Login} from "../authentication/Login";
-import {Register} from "../authentication/Register";
-import {Footer} from "../common/Footer";
+import {SnippetList} from "../features/snippets/SnippetList";
+import {TagList} from "../features/tags/TagList";
+import {CategoryList} from "../features/categories/CatetoryList";
+import {Feedback} from "../features/feedback/Feedback";
+import {Login} from "../features/authentication/Login";
+import {Register} from "../features/authentication/Register";
+import {Footer} from "../features/common/Footer";
 import "./Main.css";
 
 function App() {
