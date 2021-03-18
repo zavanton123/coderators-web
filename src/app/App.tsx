@@ -9,23 +9,26 @@ import {Login} from "../features/authentication/Login";
 import {Register} from "../features/authentication/Register";
 import {Footer} from "../features/common/Footer";
 import "./Main.css";
+import ErrorBoundary from "../features/common/ErrorBoundary";
 
 function App() {
   return (
-    <div className="page-container">
-      <main className="content-wrap">
-        <Navigation/>
-        <Switch>
-          <Route exact path="/" component={SnippetList}/>
-          <Route exact path="/categories/" component={CategoryList}/>
-          <Route exact path="/tags/" component={TagList}/>
-          <Route exact path="/feedback" component={Feedback}/>
-          <Route exact path="/login" component={Login}/>
-          <Route exact path="/register" component={Register}/>
-        </Switch>
-      </main>
-      <Footer/>
-    </div>
+    <ErrorBoundary>
+      <div className="page-container">
+        <main className="content-wrap">
+          <Navigation/>
+          <Switch>
+            <Route exact path="/" component={SnippetList}/>
+            <Route exact path="/categories/" component={CategoryList}/>
+            <Route exact path="/tags/" component={TagList}/>
+            <Route exact path="/feedback" component={Feedback}/>
+            <Route exact path="/login" component={Login}/>
+            <Route exact path="/register" component={Register}/>
+          </Switch>
+        </main>
+        <Footer/>
+      </div>
+    </ErrorBoundary>
   );
 }
 

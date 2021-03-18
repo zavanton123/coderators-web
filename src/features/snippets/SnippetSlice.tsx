@@ -32,6 +32,9 @@ export const loadSnippets = (): AppThunk => dispatch => {
       console.log(`zavanton - data`);
       console.log(response.data);
     })
+    .catch(error => {
+      console.log(`zavanton - error is caught`);
+    })
 };
 
 export const snippetReducer = snippetSlice.reducer;
