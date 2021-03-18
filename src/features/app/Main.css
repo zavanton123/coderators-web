@@ -1,0 +1,17 @@
+.page-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+.content-wrap {
+    /* Footer height */
+    padding-bottom: 4rem;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Footer height */
+    height: 4rem;
+}
