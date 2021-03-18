@@ -48,7 +48,7 @@ const CustomNavItem = (props: CustomNavItemProps) => {
   </NavItem>
 }
 
-export const NavigationHeader = () => {
+export const Navigation = () => {
   return (
     <div>
       <CustomNavbar dark expand="md">

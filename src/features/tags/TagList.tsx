@@ -1,11 +1,16 @@
 import React from 'react';
+import {PageHeader} from "../common/PageHeader";
+import {Container} from "reactstrap";
 
 
 export const TagList = () => {
 
   return (
     <>
-      <h1>Tag List</h1>
+      <PageHeader title="Tags"/>
+      <Container>
+        <h1>Tags</h1>
+      </Container>
     </>
-  )
+  );
 }
