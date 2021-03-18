@@ -1,20 +1,60 @@
 import React from 'react';
+import {
+  Collapse,
+  Container,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
+  Nav,
+  Navbar,
+  NavbarText,
+  NavbarToggler,
+  NavItem,
+  UncontrolledDropdown,
+} from "reactstrap";
 import {Link} from 'react-router-dom';
+import styled from 'styled-components'
+
+const CustomNavbar = styled(Navbar)`
+  background-color: blueviolet;
+`;
 
 export const NavigationHeader = () => {
-
   return (
-    <>
-      <h1>Header</h1>
-      <ul>
-        <li><Link to="/">Coderators</Link></li>
-        <li><Link to="/categories/">Categories</Link></li>
-        <li><Link to="/tags/">Tags</Link></li>
-        <li><Link to="/feedback">Feedback</Link></li>
-        <li><Link to="/language">Language</Link></li>
-        <li><Link to="/login">Login</Link></li>
-      </ul>
-    </>
+    <div>
+      <CustomNavbar dark expand="md">
+        <Container>
+          <Link className="navbar-brand" to="/">Coderators</Link>
+          <NavbarToggler/>
+          <Collapse isOpen navbar>
+            <Nav className="mr-auto" navbar>
+              <NavItem>
+                <Link className="nav-link" to="/categories/">Categories</Link>
+              </NavItem>
+              <NavItem>
+                <Link className="nav-link" to="/tags/">Tags</Link>
+              </NavItem>
+              <NavItem>
+                <Link className="nav-link" to="/feedback/">Feedback</Link>
+              </NavItem>
+              <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle nav caret>
+                  Login
+                </DropdownToggle>
+                <DropdownMenu right>
+                  <DropdownItem>
+                    Login
+                  </DropdownItem>
+                  <DropdownItem>
+                    Register
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
+            </Nav>
+            <NavbarText>Simple Text</NavbarText>
+          </Collapse>
+        </Container>
+      </CustomNavbar>
+    </div>
   );
-}
-
+};
