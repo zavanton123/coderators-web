@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Collapse,
   Container,
@@ -13,10 +13,12 @@ import {
 import {Link} from 'react-router-dom';
 import styled from 'styled-components'
 
+// styled component extends some existing component
 const CustomNavbar = styled(Navbar)`
   background-color: blueviolet;
 `;
 
+// adding attributes (e.g. class name) to styled component
 const SearchField = styled.input.attrs(props => ({
   className: "form-control mr-sm-2",
   placeholder: "search",
@@ -49,6 +51,19 @@ const CustomNavItem = (props: CustomNavItemProps) => {
 }
 
 export const Navigation = () => {
+
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const onSearchClick = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log(`zavanton - search clicked: ${searchTerm}`);
+    setSearchTerm('');
+  }
+
+  const onSearchTermChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
+  };
+
   return (
     <div>
       <CustomNavbar dark expand="md">
@@ -72,8 +87,11 @@ export const Navigation = () => {
             </Nav>
           </Collapse>
 
-          <form className="form-inline">
-            <SearchField aria-label="Search"/>
+          <form className="form-inline" onSubmit={onSearchClick}>
+            <SearchField
+              value={searchTerm}
+              onChange={onSearchTermChange}
+              aria-label="Search"/>
             <SearchButton>Search</SearchButton>
           </form>
 
