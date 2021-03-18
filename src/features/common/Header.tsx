@@ -7,7 +7,6 @@ import {
   DropdownToggle,
   Nav,
   Navbar,
-  NavbarText,
   NavbarToggler,
   NavItem,
   UncontrolledDropdown,
@@ -19,6 +18,33 @@ const CustomNavbar = styled(Navbar)`
   background-color: blueviolet;
 `;
 
+const SearchField = styled.input.attrs(props => ({
+  className: "form-control mr-sm-2",
+  placeholder: "search",
+  type: "search"
+}))``;
+
+const SearchButton = styled.button.attrs(props => ({
+  className: "btn btn-outline-light ",
+  type: "submit",
+
+}))``;
+
+const CustomNavLink = styled(Link).attrs(props => ({
+  className: 'nav-link'
+}))``;
+
+interface CustomNavItemProps {
+  to: string;
+  title: string;
+}
+
+const CustomNavItem = (props: CustomNavItemProps) => {
+  return <NavItem>
+    <CustomNavLink to={props.to}>{props.title}</CustomNavLink>
+  </NavItem>
+}
+
 export const NavigationHeader = () => {
   return (
     <div>
@@ -28,15 +54,9 @@ export const NavigationHeader = () => {
           <NavbarToggler/>
           <Collapse isOpen navbar>
             <Nav className="mr-auto" navbar>
-              <NavItem>
-                <Link className="nav-link" to="/categories/">Categories</Link>
-              </NavItem>
-              <NavItem>
-                <Link className="nav-link" to="/tags/">Tags</Link>
-              </NavItem>
-              <NavItem>
-                <Link className="nav-link" to="/feedback/">Feedback</Link>
-              </NavItem>
+              <CustomNavItem to="/categories/" title="Categories"/>
+              <CustomNavItem to="/tags/" title="Tags"/>
+              <CustomNavItem to="/feedback/" title="Feedback"/>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
                   Login
@@ -51,8 +71,13 @@ export const NavigationHeader = () => {
                 </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>
-            <NavbarText>Simple Text</NavbarText>
           </Collapse>
+
+          <form className="form-inline">
+            <SearchField aria-label="Search"/>
+            <SearchButton>Search</SearchButton>
+          </form>
+
         </Container>
       </CustomNavbar>
     </div>
