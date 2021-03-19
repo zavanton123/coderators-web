@@ -3,6 +3,7 @@ import {Container} from "reactstrap";
 import {PageHeader} from "../common/PageHeader";
 import {useDispatch, useSelector} from "react-redux";
 import {loadSnippets, selectAllSnippets, snippetsLoadFail, snippetsLoading} from "./SnippetSlice";
+import {Link} from 'react-router-dom';
 
 interface Snippet {
   id: number;
@@ -38,7 +39,7 @@ export const SnippetList = () => {
             const snippet = item as Snippet;
             return (
               <li key={snippet.id}>
-                {(snippet as Snippet).title}
+                <Link to={`/snippets/${snippet.id}`}>{(snippet as Snippet).title}</Link>
               </li>
             )
           })
