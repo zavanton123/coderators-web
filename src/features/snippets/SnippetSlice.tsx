@@ -16,12 +16,15 @@ export const snippetSlice = createSlice({
   reducers: {
     snippetsLoadRequested: (state) => {
       state.loading = true;
+      state.error = false;
     },
     snippetsLoadError: (state) => {
+      state.loading = false;
       state.error = true;
     },
     snippetsLoadSuccess: (state, action) => {
       state.loading = false;
+      state.error = false;
       snippetAdapter.upsertMany(state, action.payload)
     }
   },

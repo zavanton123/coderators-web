@@ -8,3 +8,9 @@ export const snippetService = {
     return axios.get(`${BASE_URL}/snippets/`)
   }
 }
+
+export const categoryService = {
+  getAllCategories: () => {
+    return axios.get(`${BASE_URL}/categories/`)
+  }
+}
