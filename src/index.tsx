@@ -6,6 +6,8 @@ import {Provider} from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
 import {BrowserRouter} from "react-router-dom";
+import "prismjs/themes/prism-tomorrow.css";
+
 
 ReactDOM.render(
   <React.StrictMode>

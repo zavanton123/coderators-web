@@ -5,7 +5,8 @@ import {Container} from "reactstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../app/store";
 import {loadSnippetById} from "./SnippetSlice";
-import {Snippet} from "./SnippetList";
+import Prism from 'prismjs';
+import {Snippet} from "./models";
 
 interface SnippetDetailParams {
   snippetId: number
@@ -24,6 +25,10 @@ export const SnippetDetail = () => {
     dispatch(loadSnippetById(snippetParams.snippetId));
   }, []);
 
+  useEffect(() => {
+    Prism.highlightAll();
+  })
+
   let content;
 
   if (error) {
@@ -37,7 +42,21 @@ export const SnippetDetail = () => {
   if (currentSnippet) {
     const snippet = currentSnippet as Snippet;
     content = (
-      <p>{snippet.title}</p>
+      <>
+        <h3>{snippet.title}</h3>
+        <p>Category: {snippet.category}</p>
+        <p>Tags:</p>
+        <ul>
+          {
+            snippet.tags.map(tag => {
+              return <li>{tag}</li>
+            })
+          }
+        </ul>
+        <pre>
+          <code className={`language-css`}>{snippet.content}</code>
+        </pre>
+      </>
     );
   }
 

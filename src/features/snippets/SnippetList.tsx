@@ -4,17 +4,8 @@ import {PageHeader} from "../common/PageHeader";
 import {useDispatch, useSelector} from "react-redux";
 import {loadSnippets, selectAllSnippets, snippetsLoadFail, snippetsLoading} from "./SnippetSlice";
 import {Link} from 'react-router-dom';
+import {Snippet} from "./models";
 
-export interface Snippet {
-  id: number;
-  title: string;
-  content: string;
-  category: string;
-  tags: Array<string>;
-  author: string;
-  published_at: Date;
-  updated_at: Date
-}
 
 export const SnippetList = () => {
 
