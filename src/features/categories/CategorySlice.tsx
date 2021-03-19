@@ -37,7 +37,7 @@ export const {categoriesLoadRequest, categoriesLoadError, categoriesLoadSuccess}
 export const loadCategories = (): AppThunk => (dispatch) => {
   dispatch(categoriesLoadRequest())
   return categoryService.getAllCategories()
-    .then(response => dispatch(categoriesLoadSuccess(response.data)))
+    .then(data => dispatch(categoriesLoadSuccess(data)))
     .catch(() => dispatch(categoriesLoadError()));
 };
 
