@@ -1,15 +1,17 @@
 import {createEntityAdapter, createSlice} from "@reduxjs/toolkit";
 import {AppThunk, RootState} from "../../app/store";
-import axios from "axios";
+import {snippetService} from "../../api/ApiService";
 
+// entity adapter is used for normalizing data
 const snippetAdapter = createEntityAdapter();
+
 const initialState = snippetAdapter.getInitialState({
   loading: false,
   error: false
 });
 
 export const snippetSlice = createSlice({
-  name: 'snippet',
+  name: 'snippets',
   initialState: initialState,
   reducers: {
     snippetsLoadRequested: (state) => {
@@ -30,13 +32,11 @@ export const {snippetsLoadRequested, snippetsLoadSuccess, snippetsLoadError} = s
 
 export const loadSnippets = (): AppThunk => (dispatch) => {
   dispatch(snippetsLoadRequested());
-  axios.get("http://127.0.0.1:9999/api/snippets/")
+  snippetService.getAllSnippets()
     .then(response => {
-      console.log(response.data);
       dispatch(snippetsLoadSuccess(response.data))
     })
     .catch(error => {
-      console.log(`zavanton - error is caught`);
       dispatch(snippetsLoadError())
     })
 };
