@@ -11,6 +11,7 @@ import {Footer} from "../features/common/Footer";
 import "./Main.css";
 import ErrorBoundary from "../features/common/ErrorBoundary";
 import {SnippetDetail} from "../features/snippets/SnippetDetail";
+import {AddSnippet} from "../features/snippets/AddSnippet";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Navigation/>
           <Switch>
             <Route exact path="/" component={SnippetList}/>
+            <Route exact path="/snippets/add" component={AddSnippet}/>
             <Route exact path="/snippets/:snippetId" component={SnippetDetail}/>
             <Route exact path="/categories/" component={CategoryList}/>
             <Route exact path="/tags/" component={TagList}/>

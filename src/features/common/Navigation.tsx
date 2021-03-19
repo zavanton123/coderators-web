@@ -72,6 +72,7 @@ export const Navigation = () => {
           <NavbarToggler/>
           <Collapse isOpen navbar>
             <Nav className="mr-auto" navbar>
+              <CustomNavItem to="/snippets/add" title="Add Snippet"/>
               <CustomNavItem to="/categories/" title="Categories"/>
               <CustomNavItem to="/tags/" title="Tags"/>
               <CustomNavItem to="/feedback/" title="Feedback"/>
