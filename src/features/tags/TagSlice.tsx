@@ -1,5 +1,6 @@
 import {createAsyncThunk, createEntityAdapter, createSlice} from "@reduxjs/toolkit";
 import {tagService} from "../../api/ApiService";
+import {RootState} from "../../app/store";
 
 const tagAdapter = createEntityAdapter();
 
@@ -51,7 +52,7 @@ const tagSlice = createSlice({
 
 export const {
   selectAll: selectAllTags
-} = tagAdapter.getSelectors((state) => state.tags);
+} = tagAdapter.getSelectors((state: RootState) => state.tags);
 
 
 export const tagReducer = tagSlice.reducer;
