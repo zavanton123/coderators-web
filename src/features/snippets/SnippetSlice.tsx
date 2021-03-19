@@ -25,7 +25,7 @@ export const snippetSlice = createSlice({
     snippetsLoadSuccess: (state, action) => {
       state.loading = false;
       state.error = false;
-      snippetAdapter.upsertMany(state, action.payload)
+      snippetAdapter.upsertMany(state, action)
     }
   },
   extraReducers: {}

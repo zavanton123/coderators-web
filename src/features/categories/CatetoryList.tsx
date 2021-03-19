@@ -40,7 +40,9 @@ export const CategoryList = () => {
         {
           categories.map(item => {
             const category = item as Category;
-            return <li>{category.name}</li>
+            return <li
+              key={category.id}
+            >{category.name} -> {category.created_at}</li>
           })
         }
       </ul>

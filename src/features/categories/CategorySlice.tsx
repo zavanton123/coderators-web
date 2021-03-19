@@ -26,7 +26,7 @@ const categorySlice = createSlice({
     categoriesLoadSuccess: (state, action) => {
       state.loading = false;
       state.error = false;
-      categoryAdapter.upsertMany(state, action.payload)
+      categoryAdapter.upsertMany(state, action)
     }
   },
   extraReducers: {}

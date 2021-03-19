@@ -2,12 +2,14 @@ import {Action, configureStore, ThunkAction} from '@reduxjs/toolkit';
 import counterReducer from '../features/counter/counterSlice';
 import {snippetReducer} from "../features/snippets/SnippetSlice";
 import {categoryReducer} from "../features/categories/CategorySlice";
+import {tagReducer} from "../features/tags/TagSlice";
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
     snippets: snippetReducer,
-    categories: categoryReducer
+    categories: categoryReducer,
+    tags: tagReducer
   },
 });
 
