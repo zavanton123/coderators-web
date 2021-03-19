@@ -32,10 +32,12 @@ export const snippetSlice = createSlice({
     snippetLoadRequested: (state) => {
       state.loading = true;
       state.error = false;
+      state.currentSnippet = null;
     },
     snippetLoadError: (state) => {
       state.loading = false;
       state.error = true;
+      state.currentSnippet = null;
     },
     snippetLoadSuccess: (state, action) => {
       state.loading = false;

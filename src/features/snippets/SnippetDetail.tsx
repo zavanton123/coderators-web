@@ -15,6 +15,8 @@ export const SnippetDetail = () => {
   const params = useParams();
 
   const dispatch = useDispatch();
+  const loading = useSelector((state: RootState) => state.snippets.loading);
+  const error = useSelector((state: RootState) => state.snippets.error);
   const currentSnippet = useSelector((state: RootState) => state.snippets.currentSnippet);
 
   useEffect(() => {
@@ -24,11 +26,19 @@ export const SnippetDetail = () => {
 
   let content;
 
+  if (error) {
+    content = <p>Error...</p>;
+  }
+
+  if (loading) {
+    content = <p>Loading...</p>
+  }
+
   if (currentSnippet) {
-    const snippet = currentSnippet as Snippet
+    const snippet = currentSnippet as Snippet;
     content = (
       <p>{snippet.title}</p>
-    )
+    );
   }
 
   return (
