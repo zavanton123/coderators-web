@@ -35,20 +35,7 @@ const tagSlice = createSlice({
       state.error = true;
     });
   }
-
-
-  // extraReducers: {
-  //   [loadTags.fulfilled]: (state, action) => {
-  //     tagAdapter.upsertMany(state, action);
-  //   }
-  // }
-
-  // extraReducers: builder => {
-  //   builder.addCase([loadTags.pending], (state, action) => {
-  //     tagAdapter.upsertMany(state, action.payload);
-  //   });
-  // }
-})
+});
 
 export const {
   selectAll: selectAllTags
