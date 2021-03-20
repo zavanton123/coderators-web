@@ -5,11 +5,14 @@ import {useDispatch, useSelector} from "react-redux";
 import {loginUser, selectAccessToken, selectRefreshToken} from "./AuthenticationSlice";
 import {Redirect} from 'react-router-dom';
 import {LoginRequestParams} from "./AuthModels";
+import {RootState} from "../../app/store";
 
 export const Login = () => {
   const dispatch = useDispatch();
   const accessToken = useSelector(selectAccessToken);
   const refreshToken = useSelector(selectRefreshToken);
+  const loading = useSelector((state: RootState) => state.authentication.loading);
+  const error = useSelector((state: RootState) => state.authentication.error);
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('')
@@ -36,10 +39,20 @@ export const Login = () => {
     dispatch(loginUser(loginParams));
   };
 
+  let message;
+  if (loading) {
+    message = <p>Logging in...</p>
+  }
+
+  if (error) {
+    message = <p>Failed to login. Try again!</p>
+  }
+
   return (
     <>
       <PageHeader title="Login"/>
       <Container>
+        {message}
         <form onSubmit={onSubmit}>
           <label>Username</label>
           <br/>
