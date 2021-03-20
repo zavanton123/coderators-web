@@ -1,11 +1,21 @@
 import React, {useState} from 'react';
 import {PageHeader} from "../common/PageHeader";
 import {Button, Container} from "reactstrap";
+import {useSelector} from "react-redux";
+import {selectAccessToken, selectRefreshToken} from "./AuthenticationSlice";
+import {Redirect} from "react-router-dom";
 
 export const Register = () => {
+  const accessToken = useSelector(selectAccessToken);
+  const refreshToken = useSelector(selectRefreshToken);
+
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('')
+
+  if (accessToken || refreshToken) {
+    return <Redirect to='/'/>;
+  }
 
   const onUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
