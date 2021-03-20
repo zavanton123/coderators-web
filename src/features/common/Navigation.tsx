@@ -83,6 +83,7 @@ export const Navigation = () => {
                 <DropdownMenu right>
                   <CustomDropDownItem to="/login">Login</CustomDropDownItem>
                   <CustomDropDownItem to="/register">Register</CustomDropDownItem>
+                  <CustomDropDownItem to="/logout">Logout</CustomDropDownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>

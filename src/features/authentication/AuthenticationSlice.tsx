@@ -28,9 +28,7 @@ const authSlice = createSlice({
       state.accessToken = action.payload.access;
       state.refreshToken = action.payload.refresh;
     },
-    logoutUserSuccess: (state) => {
-      state.loading = false;
-      state.error = false;
+    logoutUser: (state) => {
       state.accessToken = null;
       state.refreshToken = null;
     }
@@ -52,6 +50,6 @@ export const loginUser = (loginParams: LoginRequestParams): AppThunk => (dispatc
 export const selectAccessToken = (state: RootState) => state.authentication.accessToken;
 export const selectRefreshToken = (state: RootState) => state.authentication.refreshToken;
 
-export const {loginUserRequested, loginUserError, loginUserSuccess, logoutUserSuccess} = authSlice.actions;
+export const {loginUserRequested, loginUserError, loginUserSuccess, logoutUser} = authSlice.actions;
 
 export const authReducer = authSlice.reducer;

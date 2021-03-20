@@ -12,6 +12,7 @@ import "./Main.css";
 import ErrorBoundary from "../features/common/ErrorBoundary";
 import {SnippetDetail} from "../features/snippets/SnippetDetail";
 import {AddSnippet} from "../features/snippets/AddSnippet";
+import {Logout} from "../features/authentication/Logout";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route exact path="/feedback" component={Feedback}/>
             <Route exact path="/login" component={Login}/>
             <Route exact path="/register" component={Register}/>
+            <Route exact path="/logout" component={Logout}/>
           </Switch>
         </main>
         <Footer/>
