@@ -12,6 +12,8 @@ import {
 } from "reactstrap";
 import {Link} from 'react-router-dom';
 import styled from 'styled-components'
+import {useSelector} from "react-redux";
+import {selectAccessToken, selectRefreshToken} from "../authentication/AuthenticationSlice";
 
 // styled component extends some existing component
 const CustomNavbar = styled(Navbar)`
@@ -50,15 +52,39 @@ const CustomNavItem = (props: CustomNavItemProps) => {
   </NavItem>
 }
 
-export const Navigation = () => {
+interface AuthNavItemsProps {
+  accessToken: string | null;
+  refreshToken: string | null;
+}
 
+const AuthNavItems = (props: AuthNavItemsProps) => {
+  if (props.accessToken && props.refreshToken) {
+    return <CustomNavItem to="/logout" title="Logout"/>
+  } else {
+    return <>
+      <UncontrolledDropdown nav inNavbar>
+        <DropdownToggle nav caret>
+          Login
+        </DropdownToggle>
+        <DropdownMenu right>
+          <CustomDropDownItem to="/login">Login</CustomDropDownItem>
+          <CustomDropDownItem to="/register">Register</CustomDropDownItem>
+        </DropdownMenu>
+      </UncontrolledDropdown>
+    </>;
+  }
+};
+
+export const Navigation = () => {
+  const accessToken = useSelector(selectAccessToken);
+  const refreshToken = useSelector(selectRefreshToken);
   const [searchTerm, setSearchTerm] = useState('');
 
   const onSearchClick = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(`zavanton - search clicked: ${searchTerm}`);
     setSearchTerm('');
-  }
+  };
 
   const onSearchTermChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
@@ -70,22 +96,14 @@ export const Navigation = () => {
         <Container>
           <Link className="navbar-brand" to="/">Coderators</Link>
           <NavbarToggler/>
+
           <Collapse isOpen navbar>
             <Nav className="mr-auto" navbar>
               <CustomNavItem to="/snippets/add" title="Add Snippet"/>
               <CustomNavItem to="/categories/" title="Categories"/>
               <CustomNavItem to="/tags/" title="Tags"/>
               <CustomNavItem to="/feedback/" title="Feedback"/>
-              <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
-                  Login
-                </DropdownToggle>
-                <DropdownMenu right>
-                  <CustomDropDownItem to="/login">Login</CustomDropDownItem>
-                  <CustomDropDownItem to="/register">Register</CustomDropDownItem>
-                  <CustomDropDownItem to="/logout">Logout</CustomDropDownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
+              <AuthNavItems accessToken={accessToken} refreshToken={refreshToken}/>
             </Nav>
           </Collapse>
 
