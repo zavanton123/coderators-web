@@ -4,11 +4,12 @@ import {LoginRequestParams} from "./AuthModels";
 import {authService} from "../../api/ApiService";
 
 const initialState = {
+  isAuthenticated: false,
   loading: false,
   error: false,
   accessToken: null,
   refreshToken: null
-}
+};
 
 const authSlice = createSlice({
   name: 'authentication',
@@ -27,10 +28,12 @@ const authSlice = createSlice({
       state.error = false;
       state.accessToken = action.payload.access;
       state.refreshToken = action.payload.refresh;
+      state.isAuthenticated = true;
     },
     logoutUser: (state) => {
       state.accessToken = null;
       state.refreshToken = null;
+      state.isAuthenticated = false;
     }
   },
   extraReducers: {}
@@ -49,6 +52,7 @@ export const loginUser = (loginParams: LoginRequestParams): AppThunk => (dispatc
 
 export const selectAccessToken = (state: RootState) => state.authentication.accessToken;
 export const selectRefreshToken = (state: RootState) => state.authentication.refreshToken;
+export const selectIsAuthenticated = (state: RootState) => state.authentication.isAuthenticated;
 
 export const {loginUserRequested, loginUserError, loginUserSuccess, logoutUser} = authSlice.actions;
 

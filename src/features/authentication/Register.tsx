@@ -2,18 +2,17 @@ import React, {useState} from 'react';
 import {PageHeader} from "../common/PageHeader";
 import {Button, Container} from "reactstrap";
 import {useSelector} from "react-redux";
-import {selectAccessToken, selectRefreshToken} from "./AuthenticationSlice";
+import {selectIsAuthenticated} from "./AuthenticationSlice";
 import {Redirect} from "react-router-dom";
 
 export const Register = () => {
-  const accessToken = useSelector(selectAccessToken);
-  const refreshToken = useSelector(selectRefreshToken);
+  const isAuthenticated = useSelector(selectIsAuthenticated);
 
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('')
 
-  if (accessToken || refreshToken) {
+  if (isAuthenticated) {
     return <Redirect to='/'/>;
   }
 

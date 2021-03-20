@@ -13,7 +13,7 @@ import {
 import {Link} from 'react-router-dom';
 import styled from 'styled-components'
 import {useSelector} from "react-redux";
-import {selectAccessToken, selectRefreshToken} from "../authentication/AuthenticationSlice";
+import {selectIsAuthenticated} from "../authentication/AuthenticationSlice";
 
 // styled component extends some existing component
 const CustomNavbar = styled(Navbar)`
@@ -53,12 +53,11 @@ const CustomNavItem = (props: CustomNavItemProps) => {
 }
 
 interface AuthNavItemsProps {
-  accessToken: string | null;
-  refreshToken: string | null;
+  isAuthenticated: boolean;
 }
 
 const AuthNavItems = (props: AuthNavItemsProps) => {
-  if (props.accessToken && props.refreshToken) {
+  if (props.isAuthenticated) {
     return <CustomNavItem to="/logout" title="Logout"/>
   } else {
     return <>
@@ -76,19 +75,22 @@ const AuthNavItems = (props: AuthNavItemsProps) => {
 };
 
 export const Navigation = () => {
-  const accessToken = useSelector(selectAccessToken);
-  const refreshToken = useSelector(selectRefreshToken);
+  const isAuthenticated = useSelector(selectIsAuthenticated);
   const [searchTerm, setSearchTerm] = useState('');
 
   const onSearchClick = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(`zavanton - search clicked: ${searchTerm}`);
     setSearchTerm('');
   };
 
   const onSearchTermChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
+
+  let addSnippetsNavLink
+  if (isAuthenticated) {
+    addSnippetsNavLink = <CustomNavItem to="/snippets/add" title="Add Snippet"/>
+  }
 
   return (
     <div>
@@ -99,11 +101,11 @@ export const Navigation = () => {
 
           <Collapse isOpen navbar>
             <Nav className="mr-auto" navbar>
-              <CustomNavItem to="/snippets/add" title="Add Snippet"/>
+              {addSnippetsNavLink}
               <CustomNavItem to="/categories/" title="Categories"/>
               <CustomNavItem to="/tags/" title="Tags"/>
               <CustomNavItem to="/feedback/" title="Feedback"/>
-              <AuthNavItems accessToken={accessToken} refreshToken={refreshToken}/>
+              <AuthNavItems isAuthenticated={isAuthenticated}/>
             </Nav>
           </Collapse>
 

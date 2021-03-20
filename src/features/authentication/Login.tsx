@@ -2,22 +2,21 @@ import React, {useState} from 'react';
 import {PageHeader} from "../common/PageHeader";
 import {Button, Container} from "reactstrap";
 import {useDispatch, useSelector} from "react-redux";
-import {loginUser, selectAccessToken, selectRefreshToken} from "./AuthenticationSlice";
+import {loginUser, selectIsAuthenticated} from "./AuthenticationSlice";
 import {Redirect} from 'react-router-dom';
 import {LoginRequestParams} from "./AuthModels";
 import {RootState} from "../../app/store";
 
 export const Login = () => {
   const dispatch = useDispatch();
-  const accessToken = useSelector(selectAccessToken);
-  const refreshToken = useSelector(selectRefreshToken);
+  const isAuthenticated = useSelector(selectIsAuthenticated);
   const loading = useSelector((state: RootState) => state.authentication.loading);
   const error = useSelector((state: RootState) => state.authentication.error);
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('')
 
-  if (accessToken || refreshToken) {
+  if (isAuthenticated) {
     return <Redirect to='/'/>;
   }
 
