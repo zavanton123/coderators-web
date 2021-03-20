@@ -2,6 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 import {AppThunk, RootState} from "../../app/store";
 import {LoginRequestParams} from "./AuthModels";
 import {authService} from "../../api/ApiService";
+import {ACCESS_TOKEN, REFRESH_TOKEN} from "../common/Constants";
 
 const initialState = {
   isAuthenticated: false,
@@ -29,11 +30,15 @@ const authSlice = createSlice({
       state.accessToken = action.payload.access;
       state.refreshToken = action.payload.refresh;
       state.isAuthenticated = true;
+      localStorage.setItem(ACCESS_TOKEN, action.payload.access);
+      localStorage.setItem(REFRESH_TOKEN, action.payload.refresh)
     },
     logoutUser: (state) => {
       state.accessToken = null;
       state.refreshToken = null;
       state.isAuthenticated = false;
+      localStorage.removeItem(ACCESS_TOKEN);
+      localStorage.removeItem(REFRESH_TOKEN);
     }
   },
   extraReducers: {}

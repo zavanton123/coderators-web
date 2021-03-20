@@ -13,8 +13,23 @@ import ErrorBoundary from "../features/common/ErrorBoundary";
 import {SnippetDetail} from "../features/snippets/SnippetDetail";
 import {AddSnippet} from "../features/snippets/AddSnippet";
 import {Logout} from "../features/authentication/Logout";
+import {ACCESS_TOKEN, REFRESH_TOKEN} from "../features/common/Constants";
+import {useDispatch} from "react-redux";
+import {loginUserSuccess} from "../features/authentication/AuthenticationSlice";
 
 function App() {
+  const dispatch = useDispatch();
+
+  const access = localStorage.getItem(ACCESS_TOKEN);
+  const refresh = localStorage.getItem(REFRESH_TOKEN);
+
+  if (access && refresh) {
+    dispatch(loginUserSuccess({
+      access: access,
+      refresh: refresh
+    }));
+  }
+
   return (
     <ErrorBoundary>
       <div className="page-container">
