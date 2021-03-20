@@ -3,11 +3,12 @@ import {PageHeader} from "../common/PageHeader";
 import {Button, Container} from "reactstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {loginUser, selectIsAuthenticated} from "./AuthenticationSlice";
-import {Redirect} from 'react-router-dom';
-import {LoginRequestParams} from "./AuthModels";
+import {Redirect, useLocation} from 'react-router-dom';
+import {LoginRequestParams, RedirectParams} from "./AuthModels";
 import {RootState} from "../../app/store";
 
 export const Login = () => {
+  const location = useLocation();
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const loading = useSelector((state: RootState) => state.authentication.loading);
@@ -17,7 +18,12 @@ export const Login = () => {
   const [password, setPassword] = useState('')
 
   if (isAuthenticated) {
-    return <Redirect to='/'/>;
+    if (location.state) {
+      const from = (location.state as RedirectParams).from;
+      return <Redirect to={from}/>;
+    } else {
+      return <Redirect to="/"/>
+    }
   }
 
   const onUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,7 +36,6 @@ export const Login = () => {
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(`zavanton - onSubmit: ${username} -> ${password}`);
     const loginParams: LoginRequestParams = {
       username: username,
       password: password
