@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {PageHeader} from "../common/PageHeader";
 import {Button, Container} from "reactstrap";
 import styled from "styled-components";
-import {RedirectToLogin} from "../authentication/Redirects";
+import {RedirectToLogin} from "../authentication/RedirectToLogin";
 
 const CustomInput = styled.input.attrs(props => ({
   className: 'form-control'
