@@ -16,6 +16,7 @@ import {Logout} from "../features/authentication/Logout";
 import {ACCESS_TOKEN, REFRESH_TOKEN} from "../features/common/Constants";
 import {useDispatch} from "react-redux";
 import {loginUserSuccess} from "../features/authentication/AuthenticationSlice";
+import {Profile} from "../features/profile/Profile";
 
 function App() {
   const dispatch = useDispatch();
@@ -44,6 +45,7 @@ function App() {
             <Route exact path="/feedback" component={Feedback}/>
             <Route exact path="/login" component={Login}/>
             <Route exact path="/register" component={Register}/>
+            <Route exact path="/users/me" component={Profile} />
             <Route exact path="/logout" component={Logout}/>
           </Switch>
         </main>

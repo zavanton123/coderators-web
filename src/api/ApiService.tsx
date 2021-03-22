@@ -13,6 +13,14 @@ export const authService = {
   }
 };
 
+// todo zavanton - add jwt header!!!
+export const profileService = {
+  fetchInfo: () => {
+    return axios.get(`${BASE_URL}/users/me`)
+      .then(response => response.data)
+  }
+}
+
 export const snippetService = {
   getAllSnippets: () => {
     return axios.get(`${BASE_URL}/snippets/`)

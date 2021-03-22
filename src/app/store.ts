@@ -4,10 +4,12 @@ import {snippetReducer} from "../features/snippets/SnippetSlice";
 import {categoryReducer} from "../features/categories/CategorySlice";
 import {tagReducer} from "../features/tags/TagSlice";
 import {authReducer} from "../features/authentication/AuthenticationSlice";
+import {profileReducer} from "../features/profile/ProfileSlice";
 
 export const store = configureStore({
   reducer: {
     authentication: authReducer,
+    profile: profileReducer,
     counter: counterReducer,
     snippets: snippetReducer,
     categories: categoryReducer,
