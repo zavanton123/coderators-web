@@ -34,13 +34,16 @@ const categorySlice = createSlice({
     categoryAddSuccess: (state, action) => {
       categoryAdapter.addOne(state, action.payload);
     },
+    categoryUpdateSuccess: (state, action) => {
+      categoryAdapter.updateOne(state, action.payload)
+    }
   },
   extraReducers: {}
 })
 
 export const {
   categoriesLoadRequest, categoriesLoadError, categoriesLoadSuccess,
-  categoryAddSuccess
+  categoryAddSuccess, categoryUpdateSuccess
 } = categorySlice.actions;
 
 export const loadCategories = (): AppThunk => (dispatch) => {
@@ -53,6 +56,11 @@ export const loadCategories = (): AppThunk => (dispatch) => {
 export const addCategory = (name: string): AppThunk => dispatch => {
   categoryService.addCategory(name)
     .then(data => dispatch(categoryAddSuccess(data)))
+}
+
+export const updateCategory = (id: number, name: string): AppThunk => dispatch => {
+  categoryService.updateCategory(id, name)
+    .then(data => dispatch(categoryUpdateSuccess(data)))
 }
 
 export const {

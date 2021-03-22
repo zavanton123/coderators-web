@@ -18,6 +18,7 @@ import {useDispatch} from "react-redux";
 import {loginUserSuccess} from "../features/authentication/AuthenticationSlice";
 import {Profile} from "../features/profile/Profile";
 import {CategoryPage} from "../features/categories/CategoryPage";
+import {UpdateCategory} from "../features/categories/UpdateCategory";
 
 function App() {
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ function App() {
             <Route exact path="/snippets/add" component={AddSnippet}/>
             <Route exact path="/snippets/:snippetId" component={SnippetDetail}/>
             <Route exact path="/categories/" component={CategoryPage}/>
+            <Route exact path="/categories/:categoryId" component={UpdateCategory}/>
             <Route exact path="/tags/" component={TagList}/>
             <Route exact path="/feedback" component={Feedback}/>
             <Route exact path="/login" component={Login}/>

@@ -60,7 +60,16 @@ export const categoryService = {
     })
       .then(responseToData)
   },
-
+  updateCategory: (id: number, name: string) => {
+    return axios.put(addPath(`/categories/${id}/`), {
+      name: name
+    }, {
+      headers: {
+        Authorization: createAuthHeader()
+      }
+    })
+      .then(responseToData)
+  }
 };
 
 export const tagService = {
