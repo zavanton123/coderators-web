@@ -5,10 +5,11 @@ import {ACCESS_TOKEN, JWT} from "../features/common/Constants";
 const BASE_URL = "http://127.0.0.1:9999/api";
 
 const responseToData = (response: AxiosResponse) => response.data
+const addPath = (path: string) => `${BASE_URL}${path}`
 
 export const authService = {
   userLogin: (loginParams: LoginRequestParams) => {
-    return axios.post(`${BASE_URL}/jwt/create/`, {
+    return axios.post(addPath('/jwt/create/'), {
       username: loginParams.username,
       password: loginParams.password
     })
@@ -19,7 +20,7 @@ export const authService = {
 export const profileService = {
   fetchInfo: () => {
     const accessToken = localStorage.getItem(ACCESS_TOKEN);
-    return axios.get(`${BASE_URL}/users/me`, {
+    return axios.get(addPath('/users/me'), {
       headers: {
         Authorization: `${JWT} ${accessToken}`
       }
@@ -30,25 +31,25 @@ export const profileService = {
 
 export const snippetService = {
   getAllSnippets: () => {
-    return axios.get(`${BASE_URL}/snippets/`)
+    return axios.get(addPath('/snippets/'))
       .then(responseToData);
   },
   getSnippetById: (id: number) => {
-    return axios.get(`${BASE_URL}/snippets/${id}`)
+    return axios.get(addPath(`/snippets/${id}`))
       .then(responseToData);
   }
 };
 
 export const categoryService = {
   getAllCategories: () => {
-    return axios.get(`${BASE_URL}/categories/`)
+    return axios.get(addPath('/categories/'))
       .then(responseToData);
   }
 };
 
 export const tagService = {
   getAllTags: () => {
-    return axios.get(`${BASE_URL}/tags/`)
+    return axios.get(addPath('/tags/'))
       .then(responseToData);
   }
 };
