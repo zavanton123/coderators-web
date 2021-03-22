@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {Button, Container} from "reactstrap";
-import {useParams} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import {UpdateCategoryParams} from "./CategoryModels";
 import {selectCategoryById, updateCategory} from "./CategorySlice";
 import {PageHeader} from "../common/PageHeader";
@@ -10,19 +10,21 @@ import {RootState} from "../../app/store";
 export const UpdateCategory = () => {
   const dispatch = useDispatch();
   const params = useParams();
-  const categoryId = (params as UpdateCategoryParams).categoryId
-
+  const categoryId = (params as UpdateCategoryParams).categoryId;
   const category = useSelector((state: RootState) => selectCategoryById(state, categoryId));
   const [name, setName] = useState(category ? category.name : '');
+  const history = useHistory()
 
   const onFieldChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value)
   };
 
-  let onFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const onFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    console.log(`zavanton - onFormSubmit`);
     event.preventDefault();
     dispatch(updateCategory(categoryId, name))
     setName('');
+    history.replace("/categories/");
   };
 
   return (
