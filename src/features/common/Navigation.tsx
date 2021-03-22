@@ -57,21 +57,29 @@ interface AuthNavItemsProps {
 }
 
 const AuthNavItems = (props: AuthNavItemsProps) => {
+  let label
+  let content;
+
   if (props.isAuthenticated) {
-    return <CustomNavItem to="/logout" title="Logout"/>
+    label = "Profile"
+    content = <>
+      <CustomDropDownItem to="/users/me">Profile</CustomDropDownItem>
+      <CustomDropDownItem to="/logout">Logout</CustomDropDownItem>
+    </>
   } else {
-    return <>
-      <UncontrolledDropdown nav inNavbar>
-        <DropdownToggle nav caret>
-          Login
-        </DropdownToggle>
-        <DropdownMenu right>
-          <CustomDropDownItem to="/login">Login</CustomDropDownItem>
-          <CustomDropDownItem to="/register">Register</CustomDropDownItem>
-        </DropdownMenu>
-      </UncontrolledDropdown>
-    </>;
+    label = "Login"
+    content = <>
+      <CustomDropDownItem to="/login">Login</CustomDropDownItem>
+      <CustomDropDownItem to="/register">Register</CustomDropDownItem>
+    </>
   }
+
+  return <UncontrolledDropdown nav inNavbar>
+    <DropdownToggle nav caret>{label}</DropdownToggle>
+    <DropdownMenu right>
+      {content}
+    </DropdownMenu>
+  </UncontrolledDropdown>
 };
 
 export const Navigation = () => {
