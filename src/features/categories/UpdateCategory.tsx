@@ -3,9 +3,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {Button, Container} from "reactstrap";
 import {useHistory, useParams} from "react-router-dom";
 import {UpdateCategoryParams} from "./CategoryModels";
-import {selectCategoryById, updateCategory} from "./CategorySlice";
+import {categoryUpdateSuccess, selectCategoryById} from "./CategorySlice";
 import {PageHeader} from "../common/PageHeader";
 import {RootState} from "../../app/store";
+import {categoryService} from "../../api/ApiService";
 
 export const UpdateCategory = () => {
   const dispatch = useDispatch();
@@ -20,11 +21,14 @@ export const UpdateCategory = () => {
   };
 
   const onFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    console.log(`zavanton - onFormSubmit`);
     event.preventDefault();
-    dispatch(updateCategory(categoryId, name))
-    setName('');
-    history.replace("/categories/");
+
+    categoryService.updateCategory(categoryId, name)
+      .then(data => {
+        dispatch(categoryUpdateSuccess(data));
+        history.replace("/categories/")
+      })
+      .catch(error => console.log(`zavanton - error: ${error}`));
   };
 
   return (

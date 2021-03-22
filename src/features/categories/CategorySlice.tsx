@@ -63,12 +63,6 @@ export const addCategory = (name: string): AppThunk => dispatch => {
     .catch(error => console.log(`zavanton - error: ${error}`));
 }
 
-export const updateCategory = (id: number, name: string): AppThunk => dispatch => {
-  return categoryService.updateCategory(id, name)
-    .then(data => dispatch(categoryUpdateSuccess(data)))
-    .catch(error => console.log(`zavanton - error: ${error}`));
-}
-
 export const deleteCategory = (id: number): AppThunk => dispatch => {
   return categoryService.deleteCategory(id)
     .then(() => dispatch(categoryDeleteSuccess(id)))
