@@ -5,6 +5,7 @@ import {Category} from "./CategoryModels";
 
 
 const categoryAdapter = createEntityAdapter({
+  // selectId: (category) => category.id,
   sortComparer: (first: Category, second: Category) => Number(second.created_at > first.created_at)
 });
 
@@ -36,7 +37,7 @@ const categorySlice = createSlice({
     },
     categoryUpdateSuccess: (state, action) => {
       categoryAdapter.updateOne(state, action.payload)
-    }
+    },
   },
   extraReducers: {}
 })
@@ -64,6 +65,7 @@ export const updateCategory = (id: number, name: string): AppThunk => dispatch =
 }
 
 export const {
+  selectById: selectCategoryById,
   selectAll: selectAllCategories
 } = categoryAdapter.getSelectors((state: RootState) => state.categories);
 

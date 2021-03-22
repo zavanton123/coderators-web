@@ -1,17 +1,19 @@
 import React, {useState} from 'react';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Button, Container} from "reactstrap";
 import {useParams} from "react-router-dom";
 import {UpdateCategoryParams} from "./CategoryModels";
-import {updateCategory} from "./CategorySlice";
+import {selectCategoryById, updateCategory} from "./CategorySlice";
 import {PageHeader} from "../common/PageHeader";
+import {RootState} from "../../app/store";
 
 export const UpdateCategory = () => {
   const dispatch = useDispatch();
-  const [name, setName] = useState('');
   const params = useParams();
-
   const categoryId = (params as UpdateCategoryParams).categoryId
+
+  const category = useSelector((state: RootState) => selectCategoryById(state, categoryId));
+  const [name, setName] = useState(category ? category.name : '');
 
   const onFieldChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value)

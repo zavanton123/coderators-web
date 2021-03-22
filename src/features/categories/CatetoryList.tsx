@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {loadCategories, selectAllCategories} from './CategorySlice'
 import {RootState} from "../../app/store";
 import {Category} from "./CategoryModels";
+import {Link} from 'react-router-dom';
 
 
 export const CategoryList = () => {
@@ -35,7 +36,7 @@ export const CategoryList = () => {
             const category = item as Category;
             return <li
               key={category.id}
-            >{category.name} -> {category.created_at}</li>
+            >{category.name} - <Link to={`/categories/${category.id}`}>Edit</Link></li>
           })
         }
       </ul>
