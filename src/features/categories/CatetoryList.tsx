@@ -8,7 +8,6 @@ import {Link} from 'react-router-dom';
 
 
 export const CategoryList = () => {
-
   const dispatch = useDispatch();
   const loading = useSelector((state: RootState) => state.categories.loading);
   const error = useSelector((state: RootState) => state.categories.error);
@@ -16,7 +15,7 @@ export const CategoryList = () => {
 
   useEffect(() => {
     dispatch(loadCategories())
-  });
+  }, []);
 
   let content = null;
 
@@ -46,6 +45,8 @@ export const CategoryList = () => {
         }
       </ul>
     );
+  } else {
+    content = <p>No categories yet...</p>
   }
 
   return (

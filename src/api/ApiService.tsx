@@ -40,7 +40,7 @@ export const snippetService = {
       .then(responseToData);
   },
   getSnippetById: (id: number) => {
-    return axios.get(addPath(`/snippets/${id}`))
+    return axios.get(addPath(`/snippets/${id}/`))
       .then(responseToData);
   }
 };
@@ -71,7 +71,7 @@ export const categoryService = {
       .then(responseToData)
   },
   deleteCategory: (id: number) => {
-    return axios.delete(addPath(`/categories/${id}`), {
+    return axios.delete(addPath(`/categories/${id}/`), {
       headers: {
         Authorization: createAuthHeader()
       }

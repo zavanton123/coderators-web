@@ -25,6 +25,7 @@ export const AddCategory = () => {
           onChange={onFieldChange}
           value={name}
           className="form-control" type="text"/>
+        <br/>
         <Button type="submit" color="primary">Add</Button>
       </form>
     </>
