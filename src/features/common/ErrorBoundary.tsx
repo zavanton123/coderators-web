@@ -8,6 +8,7 @@ export default class ErrorBoundary extends Component<any, any> {
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     console.log(`zavanton - componentDidCatch`);
+    console.log(error);
     this.setState({error: true})
   }
 

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Button} from "reactstrap";
 import {useDispatch} from "react-redux";
 import {addCategory} from "./CategorySlice";
+import {RedirectToLogin} from "../authentication/RedirectToLogin";
 
 export const AddCategory = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,8 @@ export const AddCategory = () => {
 
   return (
     <>
+      <RedirectToLogin/>
+
       <h3>New Category</h3>
       <form onSubmit={onFormSubmit}>
         <input

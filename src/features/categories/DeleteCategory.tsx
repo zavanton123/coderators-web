@@ -3,6 +3,7 @@ import {useDispatch} from "react-redux";
 import {Redirect, useParams} from "react-router-dom";
 import {UpdateCategoryParams} from "./CategoryModels";
 import {deleteCategory} from "./CategorySlice";
+import {RedirectToLogin} from "../authentication/RedirectToLogin";
 
 export const DeleteCategory = () => {
   const dispatch = useDispatch();
@@ -10,6 +11,9 @@ export const DeleteCategory = () => {
   dispatch(deleteCategory((params as UpdateCategoryParams).categoryId))
 
   return (
-    <Redirect to="/categories/"/>
+    <>
+      <RedirectToLogin/>
+      <Redirect to="/categories/"/>
+    </>
   );
 };

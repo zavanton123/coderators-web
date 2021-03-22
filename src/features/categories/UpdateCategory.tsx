@@ -7,6 +7,7 @@ import {categoryUpdateSuccess, selectCategoryById} from "./CategorySlice";
 import {PageHeader} from "../common/PageHeader";
 import {RootState} from "../../app/store";
 import {categoryService} from "../../api/ApiService";
+import {RedirectToLogin} from "../authentication/RedirectToLogin";
 
 export const UpdateCategory = () => {
   const dispatch = useDispatch();
@@ -33,6 +34,8 @@ export const UpdateCategory = () => {
 
   return (
     <>
+      <RedirectToLogin/>
+
       <PageHeader title="Update Category"/>
       <Container>
         <form onSubmit={onFormSubmit}>
