@@ -16,7 +16,7 @@ export const CategoryList = () => {
 
   useEffect(() => {
     dispatch(loadCategories())
-  }, []);
+  });
 
   let content = null;
 

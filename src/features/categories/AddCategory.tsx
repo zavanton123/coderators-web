@@ -21,12 +21,10 @@ export const AddCategory = () => {
     <>
       <h3>New Category</h3>
       <form onSubmit={onFormSubmit}>
-        <div>
-          <input
-            onChange={onFieldChange}
-            value={name}
-            className="form-control" type="text"/>
-        </div>
+        <input
+          onChange={onFieldChange}
+          value={name}
+          className="form-control" type="text"/>
         <Button type="submit" color="primary">Add</Button>
       </form>
     </>
