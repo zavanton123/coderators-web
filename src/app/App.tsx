@@ -3,7 +3,6 @@ import {Navigation} from "../features/common/Navigation";
 import {Route, Switch} from 'react-router-dom';
 import {SnippetList} from "../features/snippets/SnippetList";
 import {TagList} from "../features/tags/TagList";
-import {CategoryList} from "../features/categories/CatetoryList";
 import {Feedback} from "../features/feedback/Feedback";
 import {Login} from "../features/authentication/Login";
 import {Register} from "../features/authentication/Register";
@@ -19,6 +18,7 @@ import {loginUserSuccess} from "../features/authentication/AuthenticationSlice";
 import {Profile} from "../features/profile/Profile";
 import {CategoryPage} from "../features/categories/CategoryPage";
 import {UpdateCategory} from "../features/categories/UpdateCategory";
+import {DeleteCategory} from "../features/categories/DeleteCategory";
 
 function App() {
   const dispatch = useDispatch();
@@ -43,12 +43,13 @@ function App() {
             <Route exact path="/snippets/add" component={AddSnippet}/>
             <Route exact path="/snippets/:snippetId" component={SnippetDetail}/>
             <Route exact path="/categories/" component={CategoryPage}/>
-            <Route exact path="/categories/:categoryId" component={UpdateCategory}/>
+            <Route exact path="/categories/edit/:categoryId" component={UpdateCategory}/>
+            <Route exact path="/categories/delete/:categoryId" component={DeleteCategory}/>
             <Route exact path="/tags/" component={TagList}/>
             <Route exact path="/feedback" component={Feedback}/>
             <Route exact path="/login" component={Login}/>
             <Route exact path="/register" component={Register}/>
-            <Route exact path="/users/me" component={Profile} />
+            <Route exact path="/users/me" component={Profile}/>
             <Route exact path="/logout" component={Logout}/>
           </Switch>
         </main>

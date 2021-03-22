@@ -69,7 +69,15 @@ export const categoryService = {
       }
     })
       .then(responseToData)
-  }
+  },
+  deleteCategory: (id: number) => {
+    return axios.delete(addPath(`/categories/${id}`), {
+      headers: {
+        Authorization: createAuthHeader()
+      }
+    })
+      .then(responseToData)
+  },
 };
 
 export const tagService = {

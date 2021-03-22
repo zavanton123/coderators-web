@@ -36,7 +36,12 @@ export const CategoryList = () => {
             const category = item as Category;
             return <li
               key={category.id}
-            >{category.name} - <Link to={`/categories/${category.id}`}>Edit</Link></li>
+            >{category.name}
+              <span> - </span>
+              <Link to={`/categories/edit/${category.id}`}>Edit</Link>
+              <span> - </span>
+              <Link to={`/categories/delete/${category.id}`}>Delete</Link>
+            </li>
           })
         }
       </ul>
