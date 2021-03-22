@@ -1,17 +1,10 @@
 import React, {useEffect} from 'react';
-import {PageHeader} from "../common/PageHeader";
 import {Container} from "reactstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {loadCategories, selectAllCategories} from './CategorySlice'
 import {RootState} from "../../app/store";
+import {Category} from "./CategoryModels";
 
-interface Category {
-  id: number;
-  name: string;
-  slug: string;
-  created_at: Date;
-  updated_at: Date;
-}
 
 export const CategoryList = () => {
 
@@ -50,11 +43,8 @@ export const CategoryList = () => {
   }
 
   return (
-    <>
-      <PageHeader title="Categories"/>
-      <Container>
-        {content}
-      </Container>
-    </>
+    <Container>
+      {content}
+    </Container>
   );
 };

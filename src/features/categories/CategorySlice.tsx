@@ -1,9 +1,12 @@
 import {createEntityAdapter, createSlice} from "@reduxjs/toolkit";
 import {AppThunk, RootState} from "../../app/store";
 import {categoryService} from "../../api/ApiService";
+import {Category} from "./CategoryModels";
 
 
-const categoryAdapter = createEntityAdapter();
+const categoryAdapter = createEntityAdapter({
+  sortComparer: (first: Category, second: Category) => Number(second.created_at > first.created_at)
+});
 
 const initialState = categoryAdapter.getInitialState({
   loading: false,
@@ -27,12 +30,18 @@ const categorySlice = createSlice({
       state.loading = false;
       state.error = false;
       categoryAdapter.upsertMany(state, action)
-    }
+    },
+    categoryAddSuccess: (state, action) => {
+      categoryAdapter.addOne(state, action.payload);
+    },
   },
   extraReducers: {}
 })
 
-export const {categoriesLoadRequest, categoriesLoadError, categoriesLoadSuccess} = categorySlice.actions;
+export const {
+  categoriesLoadRequest, categoriesLoadError, categoriesLoadSuccess,
+  categoryAddSuccess
+} = categorySlice.actions;
 
 export const loadCategories = (): AppThunk => (dispatch) => {
   dispatch(categoriesLoadRequest())
@@ -40,6 +49,11 @@ export const loadCategories = (): AppThunk => (dispatch) => {
     .then(data => dispatch(categoriesLoadSuccess(data)))
     .catch(() => dispatch(categoriesLoadError()));
 };
+
+export const addCategory = (name: string): AppThunk => dispatch => {
+  categoryService.addCategory(name)
+    .then(data => dispatch(categoryAddSuccess(data)))
+}
 
 export const {
   selectAll: selectAllCategories
